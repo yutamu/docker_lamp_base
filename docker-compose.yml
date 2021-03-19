@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  # centos7 apache2.4.*(http2)
+  web:
+    build: ./web
+    ports:
+      - '80:80'
+    depends_on:
+      - db
+    volumes:
+      - ./html:/var/www/html
+      - ./web/httpd.conf:/etc/httpd/conf/httpd.conf
+    restart: always
+  # mariaDB
+  db:
+    build: ./db
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+    - datastore:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_USER: 'root'
+      MYSQL_ROOT_PASSWORD: 'password'
+
+volumes:
+  datastore:
