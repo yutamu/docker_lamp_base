@@ -1,13 +1,6 @@
 FROM centos:7
 RUN yum update -y
 
-# install leatest apache2.4.*
-# RUN yum -y install wget epel-release
-# RUN yum install -y vim;
-# RUN yum remove -y php-*
-# RUN yum install -y --enablerepo=epel,remi,remi-safe,remi-php72 php php-mbstring php-mysql php-pdo
-# RUN yum install -y php
-
 RUN yum -y install wget epel-release vim
 
 RUN wget http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
@@ -20,5 +13,4 @@ RUN yum install -y httpd;
 
 COPY docker.conf /etc/httpd/conf.d/docker.conf
 
-# dockre can not use systemd without permission, apahce is started with httpd
 CMD ["/usr/sbin/httpd", "-DFOREGROUND"]
